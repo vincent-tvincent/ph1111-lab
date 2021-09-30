@@ -1,0 +1,36 @@
+#put things there and ignore the rest, it can run.
+hart1 = {"vi": 0.4947,"dvi": 0.0008,"vf": 0.2308,"dvf": 0.0052,"m": 0.4957,"dm": 0.0005}
+chart2 = {"vi": 0.0002,"dvi": 0.0014,"vf": 0.2302,"dvf": 0.0037,"m": 0.5005,"dm": 0.0005}
+
+p1_i = chart1["vi"] * chart1["m"]
+p2_i = chart2["vi"] * chart2["m"]
+p1_f = chart1["vf"] * chart1["m"]
+p2_f = chart2["vf"] * chart2["m"]n
+
+dp1_i = chart1["vi"] * chart1["m"]*(chart1["dvi"]/chart1["vi"] + chart1["dm"]/chart1["m"])
+dp2_i = chart2["vi"] * chart2["m"]*(chart2["dvf"]/chart2["vf"] + chart2["dm"]/chart2["m"])
+dp1_f = chart1["vf"] * chart1["m"]*(chart1["dvi"]/chart1["vi"] + chart1["dm"]/chart1["m"])
+dp2_f = chart2["vf"] * chart2["m"]*(chart2["dvf"]/chart2["vf"] + chart2["dm"]/chart2["m"])
+
+def ke(m,v):
+    return (m * (v**2) )/ 2 # I'm lazy, that's it
+ke1_i = ke(chart1["m"], chart1["vi"])
+ke1_f = ke(chart1["m"], chart1["vf"])
+ke2_i = ke(chart2["m"], chart2["vi"])
+ke2_f = ke(chart2["m"], chart2["vf"])
+
+dke1_i = ke(chart1["m"], chart1["vi"])*(chart1["dvi"]*2/chart1["vi"] + chart1["dm"]/chart1["m"])
+dke1_f = ke(chart1["m"], chart1["vf"])*(chart1["dvf"]*2/chart1["vf"] + chart1["dm"]/chart1["m"])
+dke2_i = ke(chart2["m"], chart2["vi"])*(chart2["dvi"]*2/chart2["vi"] + chart2["dm"]/chart2["m"])
+dke2_f = ke(chart2["m"], chart2["vf"])*(chart2["dvf"]*2/chart2["vf"] + chart2["dm"]/chart2["m"])
+
+sumP_i = p1_i + p2_i
+sumP_f = p1_f + p2_f
+
+sumKe_i = ke1_i + ke2_i
+sumKe_f = ke1_f + ke2_f
+
+
+
+print("initial total momentum: ",p1_i + p2_i," uncertainy：+-", dp1_i + dp2_i,"\nfinal total momentum： ", p1_f+p2_f," uncertainy：+-", dp1_f+dp2_f,'\n\n')
+print("initial total knetic energy: ",sumKe_i ," uncertainy：+-",dke1_i+dke2_i,"\nfinal total knetic energy: ",sumKe_f ," uncertainy：+-", dke1_f+dke2_f)
